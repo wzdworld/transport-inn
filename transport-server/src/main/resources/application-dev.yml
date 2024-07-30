@@ -1,0 +1,16 @@
+sky:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    host: localhost
+    port: 3306
+    database: transport_inn
+    username: root
+    password: 123456
+  redis:
+    host: 101.201.119.36
+    port: 6379
+    password: 1qaz
+    database: 1
+
+
+

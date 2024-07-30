@@ -57,10 +57,11 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
     @Bean
     public Docket docketAdmin() {
         log.info("准备生成接口文档");
+
         ApiInfo apiInfo = new ApiInfoBuilder()
-                .title("苍穹外卖项目接口文档")
+                .title("运输客栈项目接口文档")
                 .version("2.0")
-                .description("苍穹外卖项目接口文档")
+                .description("运输客栈项目接口文档")
                 .build();
         Docket docket = new Docket(DocumentationType.SWAGGER_2)
                 .groupName("管理端")
@@ -82,9 +83,9 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
     public Docket docketUser() {
         log.info("准备生成接口文档");
         ApiInfo apiInfo = new ApiInfoBuilder()
-                .title("苍穹外卖项目接口文档")
+                .title("运输客栈项目接口文档")
                 .version("2.0")
-                .description("苍穹外卖项目接口文档")
+                .description("运输客栈项目接口文档")
                 .build();
         Docket docket = new Docket(DocumentationType.SWAGGER_2)
                 .groupName("用户端")

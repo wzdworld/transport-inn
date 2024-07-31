@@ -1,12 +1,12 @@
 package com.example.transport.handler;
 
 
-import constant.MessageConstant;
-import exception.BaseException;
+import com.example.transport.constant.MessageConstant;
+import com.example.transport.exception.BaseException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import result.Result;
+import com.example.transport.result.Result;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 

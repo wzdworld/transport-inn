@@ -1,6 +1,8 @@
 package com.example.transport.service.impl;
 
 import com.example.transport.constant.MessageConstant;
+import com.example.transport.constant.PasswordConstant;
+import com.example.transport.dto.UserDTO;
 import com.example.transport.dto.UserLoginDTO;
 import com.example.transport.entity.User;
 import com.example.transport.exception.AccountNotFoundException;
@@ -8,8 +10,11 @@ import com.example.transport.exception.PasswordErrorException;
 import com.example.transport.mapper.UserMapper;
 import com.example.transport.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
+
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -49,5 +54,19 @@ public class UserServiceImpl implements UserService {
         // 返回查询到的对象
         return user;
 
+    }
+
+    /**
+     * 用户注册
+     *
+     * @param userDTO
+     */
+    @Override
+    public void register(UserDTO userDTO, int type) {
+        User user = new User();
+        BeanUtils.copyProperties(userDTO, user);
+        user.setType(type);
+        user.setCreatedTime(LocalDateTime.now());
+        userMapper.save(user);
     }
 }

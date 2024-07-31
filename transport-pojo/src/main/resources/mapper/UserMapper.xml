@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.transport.mapper.UserMapper">
+    <!--保存用户-->
+    <insert id="save">
+        insert into user(name, phone, password, gender, id_number, avatar, type, created_time, company_id)
+        values (#{name}, #{phone}, #{password}, #{gender}, #{idNumber}, #{avatar}, #{type}, #{createdTime},
+                #{companyId})
+    </insert>
 
     <!--根据手机号查询用户-->
     <select id="getByPhone" resultType="com.example.transport.entity.User">

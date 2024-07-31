@@ -41,10 +41,12 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
 
         registry.addInterceptor(jwtTokenOwnerInterceptor)
                 .addPathPatterns("/owner/**")
+                .excludePathPatterns("/owner/user")
                 .excludePathPatterns("/owner/user/login");
 
         registry.addInterceptor(jwtTokenDriverInterceptor)
                 .addPathPatterns("/driver/**")
+                .excludePathPatterns("/driver/user")
                 .excludePathPatterns("/driver/user/login");
     }
 

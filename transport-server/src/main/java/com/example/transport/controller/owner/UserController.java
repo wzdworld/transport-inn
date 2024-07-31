@@ -1,6 +1,8 @@
 package com.example.transport.controller.owner;
 
 import com.example.transport.constant.JwtClaimsConstant;
+import com.example.transport.dto.EmployeeDTO;
+import com.example.transport.dto.UserDTO;
 import com.example.transport.dto.UserLoginDTO;
 import com.example.transport.entity.User;
 import com.example.transport.properties.JwtProperties;
@@ -34,6 +36,7 @@ public class UserController {
 
     /**
      * 货主登录
+     *
      * @param userLoginDTO
      * @return
      */
@@ -60,5 +63,21 @@ public class UserController {
                 .token(token)
                 .build();
         return Result.success(userLoginVO);
+    }
+
+
+    /**
+     * 货主注册
+     *
+     * @param userDTO
+     * @return
+     */
+    @PostMapping
+    @ApiOperation("货主注册")
+    public Result save(@RequestBody UserDTO userDTO) {
+        System.out.println("当前线程的id" + Thread.currentThread().getId());
+        log.info("货主注册：{}", userDTO);
+        userService.register(userDTO, 1);
+        return Result.success();
     }
 }

@@ -1,5 +1,6 @@
 package com.example.transport.mapper;
 
+import com.example.transport.dto.UserDTO;
 import com.example.transport.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,5 +14,12 @@ public interface UserMapper {
      * @return
      */
     User getByPhone(String phone);
+
+
+    /**
+     * 保存用户
+     * @param user
+     */
+    void save(User user);
 
 }

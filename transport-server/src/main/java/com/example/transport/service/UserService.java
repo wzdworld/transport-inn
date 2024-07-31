@@ -1,5 +1,6 @@
 package com.example.transport.service;
 
+import com.example.transport.dto.UserDTO;
 import com.example.transport.dto.UserLoginDTO;
 import com.example.transport.entity.User;
 
@@ -12,4 +13,11 @@ public interface UserService {
      * @return
      */
     User login(UserLoginDTO userLoginDTO);
+
+    /**
+     * 用户注册
+     *
+     * @param userDTO
+     */
+    void register(UserDTO userDTO,int type);
 }

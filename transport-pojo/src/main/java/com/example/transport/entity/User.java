@@ -25,9 +25,6 @@ public class User implements Serializable {
     @ApiModelProperty(value = "类型")
     private Integer type;
 
-    @ApiModelProperty(value = "用户名")
-    private String username;
-
     @ApiModelProperty(value = "头像")
     private String avatar;
 

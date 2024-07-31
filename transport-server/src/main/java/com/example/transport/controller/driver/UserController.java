@@ -35,10 +35,15 @@ public class UserController {
     private final UserService userService;
     private final JwtProperties jwtProperties;
 
+    /**
+     * 司机登录
+     * @param userLoginDTO
+     * @return
+     */
     @PostMapping("/login")
     @ApiOperation(value = "司机登录")
     public Result<UserLoginVO> login(@RequestBody UserLoginDTO userLoginDTO) {
-        log.info("员工登录：{}", userLoginDTO);
+        log.info("司机登录：{}", userLoginDTO);
 
         User user = userService.login(userLoginDTO);
 

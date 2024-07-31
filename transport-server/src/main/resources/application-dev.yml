@@ -6,11 +6,11 @@ sky:
     database: transport_inn
     username: root
     password: 123456
-#  redis:1
-#    host: 101.201.119.36
-#    port: 6379
-#    password: 1qaz
-#    database: 1
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+    database: 1
 
 
 

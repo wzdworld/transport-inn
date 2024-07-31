@@ -1,7 +1,9 @@
 package com.example.transport.config;
 
 
-
+import com.example.transport.interceptor.JwtTokenDriverInterceptor;
+import com.example.transport.interceptor.JwtTokenOwnerInterceptor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,14 +25,11 @@ import java.util.List;
  * 配置类，注册web层相关组件
  */
 @Configuration
+@RequiredArgsConstructor
 @Slf4j
 public class WebMvcConfiguration extends WebMvcConfigurationSupport {
-
-    //@Autowired
-    //private JwtTokenAdminInterceptor jwtTokenAdminInterceptor;
-    //
-    //@Autowired
-    //private JwtTokenUserInterceptor jwtTokenUserInterceptor;
+    private final JwtTokenOwnerInterceptor jwtTokenOwnerInterceptor;
+    private final JwtTokenDriverInterceptor jwtTokenDriverInterceptor;
 
     /**
      * 注册自定义拦截器
@@ -38,15 +37,15 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
      * @param registry
      */
     protected void addInterceptors(InterceptorRegistry registry) {
-        //log.info("开始注册自定义拦截器...");
-        //registry.addInterceptor(jwtTokenAdminInterceptor)
-        //        .addPathPatterns("/admin/**")
-        //        .excludePathPatterns("/admin/employee/login");
-        //
-        //registry.addInterceptor(jwtTokenUserInterceptor)
-        //        .addPathPatterns("/user/**")
-        //        .excludePathPatterns("/user/user/login")
-        //        .excludePathPatterns("/user/shop/status");
+        log.info("开始注册自定义拦截器...");
+
+        registry.addInterceptor(jwtTokenOwnerInterceptor)
+                .addPathPatterns("/owner/**")
+                .excludePathPatterns("/owner/user/login");
+
+        registry.addInterceptor(jwtTokenDriverInterceptor)
+                .addPathPatterns("/driver/**")
+                .excludePathPatterns("/driver/user/login");
     }
 
     /**
@@ -55,7 +54,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
      * @return
      */
     @Bean
-    public Docket docketAdmin() {
+    public Docket docketOwner() {
         log.info("准备生成接口文档");
 
         ApiInfo apiInfo = new ApiInfoBuilder()
@@ -64,11 +63,11 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
                 .description("运输客栈项目接口文档")
                 .build();
         Docket docket = new Docket(DocumentationType.SWAGGER_2)
-                .groupName("管理端")
+                .groupName("货主端")
                 .apiInfo(apiInfo)
                 .select()
                 // 指定生成接口需要扫描的包
-                .apis(RequestHandlerSelectors.basePackage("com.sky.controller.admin"))
+                .apis(RequestHandlerSelectors.basePackage("com.example.transport.controller.owner"))
                 .paths(PathSelectors.any())
                 .build();
         return docket;
@@ -80,7 +79,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
      * @return
      */
     @Bean
-    public Docket docketUser() {
+    public Docket docketDriver() {
         log.info("准备生成接口文档");
         ApiInfo apiInfo = new ApiInfoBuilder()
                 .title("运输客栈项目接口文档")
@@ -88,11 +87,11 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
                 .description("运输客栈项目接口文档")
                 .build();
         Docket docket = new Docket(DocumentationType.SWAGGER_2)
-                .groupName("用户端")
+                .groupName("司机端")
                 .apiInfo(apiInfo)
                 .select()
                 // 指定生成接口需要扫描的包
-                .apis(RequestHandlerSelectors.basePackage("com.sky.controller.user"))
+                .apis(RequestHandlerSelectors.basePackage("com.example.transport.controller.driver"))
                 .paths(PathSelectors.any())
                 .build();
         return docket;
